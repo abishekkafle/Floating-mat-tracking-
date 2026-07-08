@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blue Hex Mat Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>&#128311; Blue Hex Mat Tracker</h1>
+    <p class="subtitle">Detect a blue, 6-sided floating mat; set an initial reference; and track deviation from its original position in real time.</p>
+    <div class="backend-row">
+      <label for="backend-url">Backend URL</label>
+      <input id="backend-url" type="text" value="http://localhost:8000">
+      <span id="backend-badge" class="badge badge-unknown">checking…</span>
+    </div>
+  </header>
+
+  <div id="error-banner" class="error-banner hidden"></div>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="panel">
+        <h2>Detector settings</h2>
+        <label class="field">
+          <span>HSV preset</span>
+          <select id="preset-select">
+            <option value="default">Default Blue</option>
+            <option value="light">Light Blue</option>
+            <option value="dark">Dark Blue</option>
+          </select>
+        </label>
+
+        <div class="slider-grid">
+          <label class="field"><span>H min <b id="v-h_min">90</b></span><input type="range" id="h_min" min="0" max="179" value="90"></label>
+          <label class="field"><span>H max <b id="v-h_max">140</b></span><input type="range" id="h_max" min="0" max="179" value="140"></label>
+          <label class="field"><span>S min <b id="v-s_min">80</b></span><input type="range" id="s_min" min="0" max="255" value="80"></label>
+          <label class="field"><span>S max <b id="v-s_max">255</b></span><input type="range" id="s_max" min="0" max="255" value="255"></label>
+          <label class="field"><span>V min <b id="v-v_min">80</b></span><input type="range" id="v_min" min="0" max="255" value="80"></label>
+          <label class="field"><span>V max <b id="v-v_max">255</b></span><input type="range" id="v_max" min="0" max="255" value="255"></label>
+        </div>
+
+        <label class="field"><span>Min area (px&sup2;) <b id="v-area_min">8000</b></span>
+          <input type="range" id="area_min" min="1000" max="300000" step="500" value="8000"></label>
+        <label class="field"><span>Polygon approx &epsilon; (%) <b id="v-poly_eps">3</b></span>
+          <input type="range" id="poly_eps" min="1" max="10" value="3"></label>
+        <label class="field"><span>Morph kernel (px) <b id="v-morph_k">5</b></span>
+          <input type="range" id="morph_k" min="1" max="15" step="2" value="5"></label>
+        <label class="field checkbox"><input type="checkbox" id="debug_mode"><span>Debug mode</span></label>
+      </section>
+
+      <section class="panel">
+        <h2>Camera settings</h2>
+        <label class="field"><span>Camera index</span><input type="number" id="cam_index" value="0" min="0"></label>
+        <label class="field"><span>Frame width</span>
+          <select id="frame_width"><option>640</option><option>800</option><option>960</option><option>1280</option></select></label>
+        <label class="field"><span>Frame height</span>
+          <select id="frame_height"><option>480</option><option>600</option><option>720</option><option>900</option></select></label>
+        <label class="field"><span>Processing FPS <b id="v-processing_fps">10</b></span>
+          <input type="range" id="processing_fps" min="1" max="30" value="10"></label>
+        <button id="test-camera-btn" class="btn secondary full">Test camera</button>
+        <div id="test-camera-result" class="test-camera-result"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Calibration (optional)</h2>
+        <label class="field"><span>Known mat side length (cm)</span>
+          <input type="number" id="known_side" value="29" min="0" step="1"></label>
+      </section>
+    </aside>
+
+    <section class="main-col">
+      <div class="controls-row">
+        <button id="start-btn" class="btn primary">&#9654;&#65039; Start</button>
+        <button id="stop-btn" class="btn">&#9209;&#65039; Stop</button>
+        <button id="set-ref-btn" class="btn">&#128205; Set reference (current)</button>
+        <button id="clear-btn" class="btn">&#129529; Clear reference &amp; history</button>
+      </div>
+
+      <div class="status-row">
+        <span id="status-running" class="status-item">&#128308; Status: Stopped</span>
+        <span id="status-ref" class="status-item">&#128205; Reference: Not Set</span>
+        <span id="status-mat" class="status-item">&#128311; Mat: Not Running</span>
+      </div>
+
+      <div class="video-metrics-row">
+        <div class="video-panel">
+          <div class="video-frame">
+            <img id="video-feed" alt="Live video will appear here after Start">
+            <div id="video-placeholder" class="video-placeholder">Click &#9654;&#65039; Start to begin the video stream.</div>
+          </div>
+        </div>
+        <div class="metrics-panel">
+          <div class="tile"><div class="label">&Delta; distance</div><div class="value" id="metric-distance">&mdash;</div></div>
+          <div class="tile"><div class="label">Angle drift</div><div class="value" id="metric-angle">&mdash;</div></div>
+        </div>
+      </div>
+
+      <section class="panel">
+        <h2>&#128200; Deviation over time</h2>
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="distance">Distance (cm)</button>
+          <button class="tab-btn" data-tab="angle">Angle drift (deg)</button>
+        </div>
+        <div class="panel chart-panel" id="tab-distance"><svg id="chart-distance"></svg></div>
+        <div class="panel chart-panel hidden" id="tab-angle"><svg id="chart-angle"></svg></div>
+        <button id="download-csv-btn" class="btn secondary">&#128190; Download CSV (cm)</button>
+      </section>
+
+      <section class="panel quick-start">
+        <h2>Quick start</h2>
+        <ol>
+          <li>Connect a USB webcam.</li>
+          <li>Adjust <em>Camera index</em> if needed and click <strong>Start</strong>.</li>
+          <li>Tune HSV sliders until only the mat is highlighted (inset mask at top-left of the video).</li>
+          <li>Hold the mat steady and click <strong>Set reference (current)</strong>.</li>
+          <li>Move the mat; the app shows distance and angle drift (and cm if you entered the mat's side length).</li>
+        </ol>
+      </section>
+    </section>
+  </main>
+
+  <div class="tooltip" id="tooltip"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

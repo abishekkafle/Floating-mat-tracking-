@@ -1,0 +1,101 @@
+{
+  "per_config": {
+    "B_TensionGuide": {
+      "config": "Tension-guide",
+      "n": 360,
+      "dt_sec": 5.0,
+      "block_lag_samples": 33,
+      "block_lag_sec": 165.0,
+      "block_lag_is_lower_bound": false,
+      "mean_drift_cm": 1.344462654575957,
+      "mean_drift_ci": [
+        1.3053228915730308,
+        1.374848150605711
+      ],
+      "p95_drift_cm": 1.925525891094375,
+      "p95_drift_ci": [
+        1.8149538604069209,
+        2.061282380129845
+      ],
+      "rms_heading_deg": 0.6337871033732504,
+      "rms_heading_ci": [
+        0.5845930132311133,
+        0.6597118993511601
+      ],
+      "mean_tensions_N": [
+        2.0035686228702785,
+        2.0032667592902853,
+        2.0016073479905314
+      ],
+      "tension_cov": 0.0005272797792453801,
+      "tension_cov_mbb_mean": 0.0021340106057262114,
+      "tension_cov_ci": [
+        0.00039702076850760254,
+        0.004533032809065929
+      ],
+      "convergence_mean_drift_cm": {
+        "5": 1.4294661616271187,
+        "10": 1.3920597120431724,
+        "20": 1.3538612440572078,
+        "30": 1.344462654575957
+      }
+    },
+    "C_DistributedModular": {
+      "config": "Distributed-modular",
+      "n": 360,
+      "dt_sec": 5.0,
+      "block_lag_samples": 200,
+      "block_lag_sec": 1000.0,
+      "block_lag_is_lower_bound": true,
+      "mean_drift_cm": 0.5973862218257635,
+      "mean_drift_ci": [
+        0.5940457276138889,
+        0.5990053065876038
+      ],
+      "p95_drift_cm": 1.0145357236788253,
+      "p95_drift_ci": [
+        0.988783693211375,
+        1.0462649341681856
+      ],
+      "rms_heading_deg": 0.36538296768488693,
+      "rms_heading_ci": [
+        0.34368160877648063,
+        0.36658700164567254
+      ],
+      "mean_tensions_N": [
+        2.003369958681029,
+        2.0009804278258736,
+        1.997033591550634
+      ],
+      "tension_cov": 0.0015995909640536636,
+      "tension_cov_mbb_mean": 0.0016120900225606815,
+      "tension_cov_ci": [
+        0.0006333482330526395,
+        0.002515673693873985
+      ],
+      "convergence_mean_drift_cm": {
+        "5": 0.6049759145319683,
+        "10": 0.5969678652885219,
+        "20": 0.5994825036008239,
+        "30": 0.5973862218257635
+      }
+    }
+  },
+  "cost_summary": {
+    "n_mats": 50,
+    "plants_per_mat": 65,
+    "total_plants": 3250,
+    "cost_per_mat_usd": [
+      240.0,
+      280.0
+    ],
+    "cost_per_plant_usd_reference_only": [
+      3.0,
+      4.0
+    ],
+    "total_cost_usd": [
+      12000.0,
+      14000.0
+    ]
+  }
+}

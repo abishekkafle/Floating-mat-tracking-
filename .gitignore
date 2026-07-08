@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.DS_Store
+Thumbs.db
+
+# Draft manuscript - not for the public repo
+Design & Wave Tank Evaluation-V2-VB edits.pdf
