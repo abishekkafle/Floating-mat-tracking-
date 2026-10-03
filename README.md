@@ -1,4 +1,22 @@
-Blue Hex Mat Tracker
+# Floating Mat Tracking and Parametric Design
+
+This repository includes the Blue Hex Mat Tracker and a standalone floating treatment wetland (FTW) parametric design screening tool.
+
+## FTW parametric design tool
+
+[`FTW_Parametric_Design_Tool/`](FTW_Parametric_Design_Tool/) estimates draft, freeboard, payload capacity, initial stability, wind loading, tether loads, and simplified anchor sliding resistance. It uses only the Python standard library and runs independently of the camera tracker.
+
+From the repository root:
+
+```bash
+python FTW_Parametric_Design_Tool/parametric_design_tool.py FTW_Parametric_Design_Tool/example_ftw_config.json
+python FTW_Parametric_Design_Tool/parametric_design_tool.py FTW_Parametric_Design_Tool/example_ftw_config.json --json design_results.json
+python -m unittest discover -s FTW_Parametric_Design_Tool -v
+```
+
+See the [tool documentation](FTW_Parametric_Design_Tool/PARAMETRIC_DESIGN_TOOL_README.md) for governing equations, inputs, assumptions, and limitations. The supplied implementation is documented as a reconstruction from the manuscript description. Example inputs include illustrative placeholders that must be replaced with design-case values.
+
+## Blue Hex Mat Tracker
 A real-time computer vision application for tracking the position and orientation of a blue hexagonal mat using a USB webcam. Built with Python, OpenCV, FastAPI, and a static HTML/CSS/JS frontend.
 
 Overview

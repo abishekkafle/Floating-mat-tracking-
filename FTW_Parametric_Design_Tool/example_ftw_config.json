@@ -1,0 +1,8 @@
+{
+  "_note": "Reconstructed example. Geometry/hardware values are documented FTW values; mat mass, payload, CG, wind area, line angle, friction coefficient and load factors are illustrative placeholders and must be replaced by design-case values.",
+  "geometry": {"length_m": 2.1336, "width_m": 1.8288, "thickness_m": 0.0381, "hole_count": 50, "hole_diameter_m": 0.1524},
+  "mass": {"mat_mass_kg": 8.0, "payload_mass_kg": 35.0, "mat_cg_from_bottom_m": 0.01905, "payload_cg_from_bottom_m": 0.20},
+  "environment": {"water_density_kg_m3": 997.0, "air_density_kg_m3": 1.225, "wind_speed_m_s": 6.0, "wind_drag_coefficient": 1.2, "wind_projected_area_m2": 1.5, "wind_center_of_pressure_above_waterline_m": 0.40, "other_horizontal_load_n": 0.0},
+  "mooring": {"active_lines": 3, "line_angle_from_horizontal_deg": 20.0, "dynamic_factor": 1.5, "safety_factor": 2.0, "uneven_load_factor": 1.0, "line_breaking_strength_n": 28468.6},
+  "anchor": {"block_mass_kg": 16.556, "concrete_density_kg_m3": 2300.0, "bed_friction_coefficient": 0.50}
+}

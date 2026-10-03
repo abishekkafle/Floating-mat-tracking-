@@ -1,0 +1,77 @@
+{
+  "inputs": {
+    "geometry": {
+      "length_m": 2.1336,
+      "width_m": 1.8288,
+      "thickness_m": 0.0381,
+      "hole_count": 50,
+      "hole_diameter_m": 0.1524
+    },
+    "mass": {
+      "mat_mass_kg": 8.0,
+      "payload_mass_kg": 35.0,
+      "mat_cg_from_bottom_m": 0.01905,
+      "payload_cg_from_bottom_m": 0.2
+    },
+    "environment": {
+      "water_density_kg_m3": 997.0,
+      "air_density_kg_m3": 1.225,
+      "wind_speed_m_s": 6.0,
+      "wind_drag_coefficient": 1.2,
+      "wind_projected_area_m2": 1.5,
+      "wind_center_of_pressure_above_waterline_m": 0.4,
+      "other_horizontal_load_n": 0.0
+    },
+    "mooring": {
+      "active_lines": 3,
+      "line_angle_from_horizontal_deg": 20.0,
+      "dynamic_factor": 1.5,
+      "safety_factor": 2.0,
+      "uneven_load_factor": 1.0,
+      "line_breaking_strength_n": 28468.6
+    },
+    "anchor": {
+      "block_mass_kg": 16.556,
+      "concrete_density_kg_m3": 2300.0,
+      "bed_friction_coefficient": 0.5
+    }
+  },
+  "geometry": {
+    "gross_plan_area_m2": 3.90192768,
+    "total_hole_area_m2": 0.912073462375496,
+    "net_waterplane_area_m2": 2.989854217624504,
+    "open_area_fraction": 0.23374945339209774
+  },
+  "hydrostatics": {
+    "total_operating_mass_kg": 43.0,
+    "equilibrium_draft_m": 0.014425247863342514,
+    "freeboard_m": 0.023674752136657488,
+    "net_payload_capacity_kg": 105.57170535441914,
+    "payload_margin_kg": 70.57170535441914,
+    "combined_KG_m": 0.16633488372093022,
+    "GM_roll_m": 19.161801903202523,
+    "GM_pitch_m": 26.138802295394,
+    "roll_restoring_stiffness_Nm_per_rad": 8080.262639263764
+  },
+  "wind": {
+    "wind_drag_force_n": 39.69,
+    "wind_overturning_moment_nm": 15.876,
+    "small_angle_roll_heel_deg": 0.11257403826573835
+  },
+  "mooring": {
+    "service_tension_per_active_line_n": 14.079071929856315,
+    "design_tension_per_active_line_n": 42.23721578956895,
+    "line_breaking_strength_n": 28468.6,
+    "line_utilization_ratio": 0.00148364218084377
+  },
+  "anchor": {
+    "evaluated": true,
+    "note": "Simplified friction screen only; excludes embedment, suction, scour and cyclic soil behavior.",
+    "estimated_submerged_weight_n": 91.97984491834781,
+    "sliding_resistance_n": 38.766933160161116,
+    "horizontal_design_component_n": 39.69,
+    "sliding_utilization_ratio": 1.0238106748353122,
+    "passes_simple_sliding_screen": false
+  },
+  "warnings": []
+}
