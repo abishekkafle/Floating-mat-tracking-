@@ -119,27 +119,28 @@ lim = max(
     max(abs(d["x_cm"]).max(), abs(d["y_cm"]).max()) for d in dfs.values()
 ) * 1.10
 
-fig, axes = plt.subplots(1, 2, figsize=(7.0, 3.4), sharex=True, sharey=True)
-hexes = []
-for ax, (label, d) in zip(axes, dfs.items()):
+fig, axes = plt.subplots(1, 2, figsize=(7.5, 3.4), sharey=True)
+for i, (label, d) in enumerate(dfs.items()):
+    ax = axes[i]
     c = COLORS[label]
     # Per-config colormap from white to the config color
     cmap = LinearSegmentedColormap.from_list(f"w2{label}", ["#FFFFFF", c])
     hb = ax.hexbin(d["x_cm"], d["y_cm"], gridsize=22, cmap=cmap,
-                   mincnt=1, linewidths=0.2, edgecolors="#FFFFFF")
+                   vmin=1, vmax=6, mincnt=1, linewidths=0.2, edgecolors="#FFFFFF")
     ax.set_aspect("equal")
     ax.axhline(0, color="#666666", lw=0.4); ax.axvline(0, color="#666666", lw=0.4)
     ax.set_xlabel("x (cm)")
-    ax.set_title(label, fontsize=9, color=c, fontweight="bold")
+    ax.set_title(label, fontsize=10, color=c, fontweight="bold", pad=8)
     ax.grid(True, ls="-", lw=0.3, color="#EEEEEE"); ax.set_axisbelow(True)
     ax.set_xlim(-lim, lim); ax.set_ylim(-lim, lim)
-    hexes.append(hb)
+    cb = fig.colorbar(hb, ax=ax, shrink=0.82, pad=0.03, aspect=20)
+    cb.set_label("Samples per cell", fontsize=8)
+    cb.outline.set_linewidth(0.5)
+    cb.set_ticks([1, 2, 3, 4, 5, 6])
 axes[0].set_ylabel("y (cm)")
-# Single colorbar for sample count
-cb = fig.colorbar(hexes[1], ax=axes, shrink=0.82, pad=0.025, aspect=22)
-cb.set_label("Samples per cell")
-cb.outline.set_linewidth(0.5)
-fig.savefig("/home/claude/FigS_trajectory.pdf")
-fig.savefig("/home/claude/FigS_trajectory.png")
+fig.tight_layout()
+fig.savefig("FigS_trajectory.pdf")
+fig.savefig("FigS_trajectory.png")
 plt.close(fig)
 print("Wrote FigS_trajectory.{pdf,png}")
+
