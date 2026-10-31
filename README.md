@@ -28,16 +28,20 @@ The script evaluates first-order surge/sway/yaw dynamic response amplitudes, sec
 
 $$\bar{r} = \frac{1}{T} \int_0^T \sqrt{x(t)^2 + y(t)^2}\,dt$$
 
-### Model Verification vs. Experimental Measurements
+### Model Estimates vs. Experimental Wave-Tank Measurements (Table S2)
 
-| Configuration | Metric | Model Prediction | Experimental Measurement | 95% MBB CI |
-| :--- | :--- | :---: | :---: | :---: |
-| **Distributed-Modular** | Mean radial drift | **0.63 cm** | **0.60 cm** | [0.59, 0.60] cm |
-| | RMS radial excursion | **0.66 cm** | **0.70 cm** | [0.68, 0.72] cm |
-| | RMS heading deviation | **0.41°** | **0.37°** | [0.34°, 0.37°] |
-| **Tension-Guide** | Mean radial drift | **1.31 cm** | **1.34 cm** | [1.31, 1.38] cm |
-| | RMS radial excursion | **1.37 cm** | **1.48 cm** | [1.44, 1.52] cm |
-| | RMS heading deviation | **0.63°** | **0.63°** | [0.59°, 0.66°] |
+| Performance Metric | Model Prediction | Experimental Measurement | Difference (%) | Statistical 95% MBB CI |
+| :--- | :---: | :---: | :---: | :---: |
+| **Tension-Guide: Mean radial drift** | **1.31 cm** | **1.34 cm** | –2.2% | [1.31, 1.38] cm |
+| Tension-Guide: RMS radial excursion | **1.37 cm** | **1.39 cm** | –1.4% | [1.35, 1.43] cm |
+| Tension-Guide: 95th-percentile drift | **1.86 cm** | **1.93 cm** | –3.6% | [1.81, 2.06] cm |
+| Tension-Guide: RMS heading deviation | **0.63°** | **0.63°** | 0.0% | [0.58°, 0.66°] |
+| **Distributed-Modular: Mean radial drift** | **0.63 cm** | **0.60 cm** | +5.0% | [0.59, 0.60] cm |
+| Distributed-Modular: RMS radial excursion | **0.66 cm** | **0.63 cm** | +4.8% | [0.62, 0.65] cm |
+| Distributed-Modular: 95th-percentile drift | **0.93 cm** | **1.01 cm** | –7.9% | [0.99, 1.05] cm |
+| Distributed-Modular: RMS heading deviation | **0.41°** | **0.37°** | +10.8% | [0.34°, 0.37°] |
+
+*Note: The reduced-order model provides an illustrative rigid-body screening baseline; parameters without direct measurement are identified as modeling assumptions in Table S1 of the supplementary document.*
 
 The complete publication supplementary document is available as [`Supplementary_Material.pdf`](Supplementary_Material.pdf).
 

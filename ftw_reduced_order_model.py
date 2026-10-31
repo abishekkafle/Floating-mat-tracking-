@@ -126,9 +126,11 @@ def run_model(config_name="Distributed-Modular", verbose=True):
     # Analytical root-mean-square (RMS) radial excursion:
     rms_radial_drift_cm = np.sqrt(x_0**2 + 0.5 * (X_0**2 + Y_0**2)) * 100.0
 
-    # Peak excursion:
-    t_fine = np.linspace(0.0, T_wave, 500)
-    peak_radial_drift_cm = np.max([instantaneous_r(t) for t in t_fine]) * 100.0
+    # Peak and 95th-percentile excursions:
+    t_fine = np.linspace(0.0, T_wave, 2000)
+    r_fine = np.array([instantaneous_r(t) for t in t_fine]) * 100.0
+    p95_radial_drift_cm = np.percentile(r_fine, 95)
+    peak_radial_drift_cm = np.max(r_fine)
 
     # RMS heading deviation:
     psi_rms_deg = (Psi_0 / np.sqrt(2.0)) * (180.0 / np.pi)
@@ -140,6 +142,7 @@ def run_model(config_name="Distributed-Modular", verbose=True):
         print(f"  First-order sway amplitude (Y_0):      {Y_0*100.0:.2f} cm")
         print(f"  Integrated Mean Radial Drift (r_mean): {mean_radial_drift_cm:.2f} cm")
         print(f"  RMS Radial Excursion (r_rms):          {rms_radial_drift_cm:.2f} cm")
+        print(f"  95th-Percentile Drift (r_p95):         {p95_radial_drift_cm:.2f} cm")
         print(f"  Peak Radial Excursion (r_peak):        {peak_radial_drift_cm:.2f} cm")
         print(f"  RMS Heading Deviation (psi_rms):       {psi_rms_deg:.2f} deg")
 
@@ -149,6 +152,7 @@ def run_model(config_name="Distributed-Modular", verbose=True):
         "Y_0_cm": Y_0 * 100.0,
         "mean_radial_drift_cm": mean_radial_drift_cm,
         "rms_radial_drift_cm": rms_radial_drift_cm,
+        "p95_radial_drift_cm": p95_radial_drift_cm,
         "peak_radial_drift_cm": peak_radial_drift_cm,
         "psi_rms_deg": psi_rms_deg
     }
