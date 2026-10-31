@@ -16,7 +16,20 @@ python -m unittest discover -s FTW_Parametric_Design_Tool -v
 
 See the [tool documentation](FTW_Parametric_Design_Tool/PARAMETRIC_DESIGN_TOOL_README.md) for governing equations, inputs, assumptions, and limitations. The supplied implementation is documented as a reconstruction from the manuscript description. Example inputs include illustrative placeholders that must be replaced with design-case values.
 
+## Reduced-Order Dynamic Model (Surge–Sway–Yaw)
+
+[`ftw_reduced_order_model.py`](ftw_reduced_order_model.py) implements the 3-DOF planar equations of motion for the 29.0 cm regular hexagonal laboratory specimen under regular wave forcing (f = 1.0 Hz, H = 0.04 m), cited in Section 2.4 and Section S1 of the Supplementary Material:
+
+```bash
+python ftw_reduced_order_model.py
+```
+
+The script evaluates first-order surge/sway/yaw dynamic response amplitudes, second-order mean wave drift force (Maruo, 1960), and the exact time-integrated mean radial drift over the wave period.
+
+The complete publication supplementary document is available as [`Supplementary_Material.pdf`](Supplementary_Material.pdf).
+
 ## Blue Hex Mat Tracker
+
 A real-time computer vision application for tracking the position and orientation of a blue hexagonal mat using a USB webcam. Built with Python, OpenCV, FastAPI, and a static HTML/CSS/JS frontend.
 
 Overview
