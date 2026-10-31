@@ -18,13 +18,26 @@ See the [tool documentation](FTW_Parametric_Design_Tool/PARAMETRIC_DESIGN_TOOL_R
 
 ## Reduced-Order Dynamic Model (Surge–Sway–Yaw)
 
-[`ftw_reduced_order_model.py`](ftw_reduced_order_model.py) implements the 3-DOF planar equations of motion for the 29.0 cm regular hexagonal laboratory specimen under regular wave forcing (f = 1.0 Hz, H = 0.04 m), cited in Section 2.4 and Section S1 of the Supplementary Material:
+[`ftw_reduced_order_model.py`](ftw_reduced_order_model.py) implements the 3-DOF planar equations of motion for the 29.0 cm regular hexagonal laboratory specimen under regular wave forcing ($f = 1.0\text{ Hz}$, $H = 0.04\text{ m}$), cited in Section 2.4 and Section S1 of the Supplementary Material:
 
 ```bash
 python ftw_reduced_order_model.py
 ```
 
-The script evaluates first-order surge/sway/yaw dynamic response amplitudes, second-order mean wave drift force (Maruo, 1960), and the exact time-integrated mean radial drift over the wave period.
+The script evaluates first-order surge/sway/yaw dynamic response amplitudes, second-order mean wave drift force (Maruo, 1960), and the exact time-integrated mean radial drift over the wave period:
+
+$$\bar{r} = \frac{1}{T} \int_0^T \sqrt{x(t)^2 + y(t)^2}\,dt$$
+
+### Model Verification vs. Experimental Measurements
+
+| Configuration | Metric | Model Prediction | Experimental Measurement | 95% MBB CI |
+| :--- | :--- | :---: | :---: | :---: |
+| **Distributed-Modular** | Mean radial drift | **0.63 cm** | **0.60 cm** | [0.59, 0.60] cm |
+| | RMS radial excursion | **0.66 cm** | **0.70 cm** | [0.68, 0.72] cm |
+| | RMS heading deviation | **0.41°** | **0.37°** | [0.34°, 0.37°] |
+| **Tension-Guide** | Mean radial drift | **1.31 cm** | **1.34 cm** | [1.31, 1.38] cm |
+| | RMS radial excursion | **1.37 cm** | **1.48 cm** | [1.44, 1.52] cm |
+| | RMS heading deviation | **0.63°** | **0.63°** | [0.59°, 0.66°] |
 
 The complete publication supplementary document is available as [`Supplementary_Material.pdf`](Supplementary_Material.pdf).
 
